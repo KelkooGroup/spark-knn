@@ -21,7 +21,7 @@ object MNISTBenchmark {
 
   val logger = log4j.Logger.getLogger(getClass)
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val ns = if(args.isEmpty) (2500 to 10000 by 2500).toArray else args(0).split(',').map(_.toInt)
     val path = if(args.length >= 2) args(1) else "data/mnist/mnist.bz2"
     val numPartitions = if(args.length >= 3) args(2).toInt else 10

@@ -1,10 +1,5 @@
 import Common._
 
-lazy val root = Project("spark-knn", file(".")).
-  settings(commonSettings).
-  settings(Dependencies.Versions).
-  aggregate(core, examples)
-
 lazy val core = knnProject("spark-knn-core").
   settings(
     name := "spark-knn",
@@ -19,5 +14,5 @@ lazy val core = knnProject("spark-knn-core").
 
 lazy val examples = knnProject("spark-knn-examples").
   dependsOn(core).
-  settings(fork in run := true, coverageExcludedPackages := ".*examples.*").
+  settings(run / fork := true, coverageExcludedPackages := ".*examples.*").
   settings(Dependencies.examples)
