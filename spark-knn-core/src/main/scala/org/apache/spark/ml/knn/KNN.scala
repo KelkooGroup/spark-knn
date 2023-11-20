@@ -404,7 +404,7 @@ class KNN(override val uid: String) extends Estimator[KNNModel] with KNNParams {
       .map(row => new RowWithVector(row.getAs[Vector](0), row.getStruct(1)))
     //sample data to build top-level tree
     val sampled = data.sample(withReplacement = false, $(topTreeSize).toDouble / dataset.count(), rand.nextLong()).collect()
-    val topTree = MetricTree.build(sampled, $(topTreeLeafSize), rand.nextLong(), distanceMetric)
+    val topTree = MetricTree.build(sampled.toIndexedSeq, $(topTreeLeafSize), rand.nextLong(), distanceMetric)
     //build partitioner using top-level tree
     val part = new KNNPartitioner(topTree, distanceMetric)
     //noinspection ScalaStyle
@@ -513,7 +513,7 @@ object KNN {
 
     val beta = corr * yMeanVariance.stdDev / xMeanVariance.stdDev
     val alpha = ymean - beta * xmean
-    val rs = math.exp(alpha + beta * math.log(total))
+    val rs = math.exp(alpha + beta * math.log(total.toDouble))
 
     if (beta > 0 || beta.isNaN || rs.isNaN) {
       val yMax = breeze.linalg.max(y)
@@ -577,7 +577,7 @@ object KNN {
           buffer ++= searchIndices(v, node.rightChild, tau, acc + node.leftChild.leafCount, distanceMetric)
         }
 
-        buffer
+        buffer.toSeq
       case _ => Seq(acc) // reached leaf
     }
   }

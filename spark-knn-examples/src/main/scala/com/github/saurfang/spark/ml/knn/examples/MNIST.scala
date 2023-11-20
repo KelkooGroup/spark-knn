@@ -11,7 +11,7 @@ object MNIST {
 
   val logger = log4j.Logger.getLogger(getClass)
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder().getOrCreate()
     val sc = spark.sparkContext
     import spark.implicits._
