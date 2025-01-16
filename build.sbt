@@ -1,5 +1,12 @@
 import Common._
 
+lazy val root = (project in file("."))
+  .aggregate(core, examples)
+  .settings(
+    name := "spark-knn",
+    publish / skip := true // Prevent publishing the aggregate project
+  )
+
 lazy val core = knnProject("spark-knn-core").
   settings(
     name := "spark-knn",
