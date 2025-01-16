@@ -8,7 +8,7 @@ object Dependencies {
   )
 
   object Compile {
-    val spark_version = "3.4.1"
+    val spark_version = "3.5.1"
     val spark_core = "org.apache.spark" %% "spark-core" % spark_version % "provided"
     val spark_mllib = "org.apache.spark" %% "spark-mllib" % spark_version % "provided"
     val breeze = "org.scalanlp" %% "breeze" % "2.1.0" % "provided"
