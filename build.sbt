@@ -1,5 +1,16 @@
 import Common._
 
+inThisBuild(
+  Seq(
+    organization := "com.kelkoogroup",
+    homepage := Some(url("https://github.com/KelkooGroup/spark-knn")),
+    licenses := List("Apache-2.0" -> url("https://www.apache.org/licenses/LICENSE-2.0")),
+    developers := List(
+      Developer("baitaand", "Andrea Baita", "andrea.baita@kelkoogroup.com", url("https://github.com/KelkooGroup"))
+    )
+  )
+)
+
 lazy val root = (project in file("."))
   .aggregate(core, examples)
   .settings(
@@ -9,9 +20,7 @@ lazy val root = (project in file("."))
 
 lazy val core = knnProject("spark-knn-core").
   settings(
-    name := "spark-knn",
-    credentials += Credentials(Path.userHome / ".ivy2" / ".sbtcredentials"),
-    licenses += "Apache-2.0" -> url("http://opensource.org/licenses/Apache-2.0")
+    name := "spark-knn"
   ).
   settings(Dependencies.core).
   settings(
@@ -21,5 +30,5 @@ lazy val core = knnProject("spark-knn-core").
 
 lazy val examples = knnProject("spark-knn-examples").
   dependsOn(core).
-  settings(run / fork := true, coverageExcludedPackages := ".*examples.*").
+  settings(run / fork := true, coverageExcludedPackages := ".*examples.*", publish / skip := true).
   settings(Dependencies.examples)
