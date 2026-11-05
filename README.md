@@ -1,11 +1,9 @@
 # spark-knn
 
-[![Join the chat at https://gitter.im/saurfang/spark-knn](https://badges.gitter.im/saurfang/spark-knn.svg)](https://gitter.im/saurfang/spark-knn?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-[![Build Status](https://travis-ci.org/saurfang/spark-knn.svg)](https://travis-ci.org/saurfang/spark-knn)
-[![codecov.io](http://codecov.io/github/saurfang/spark-knn/coverage.svg?branch=master)](http://codecov.io/github/saurfang/spark-knn?branch=master)
-
-WIP...
+> **This is a fork** of [saurfang/spark-knn](https://github.com/saurfang/spark-knn), maintained by
+> [Kelkoo Group](https://github.com/KelkooGroup/spark-knn). The original project has not been updated since 2020
+> and is not published on Maven Central. This fork is updated for recent Spark and Scala versions, and published
+> as `com.kelkoogroup:spark-knn`. Licensed under Apache-2.0, original work by Forest Fang and contributors.
 
 k-Nearest Neighbors algorithm (k-NN) implemented on Apache Spark. This uses a hybrid spill tree approach to
 achieve high accuracy and search efficiency. The simplicity of k-NN and lack of tuning parameters makes k-NN
@@ -13,8 +11,27 @@ a useful baseline model for many machine learning problems.
 
 ## How to Use
 
-This package is published using [sbt-spark-package](https://github.com/databricks/sbt-spark-package) and
-linking information can be found at http://spark-packages.org/package/saurfang/spark-knn
+This package is published on [Maven Central](https://central.sonatype.com/namespace/com.kelkoogroup) as
+`com.kelkoogroup:spark-knn` for Scala 2.12 and 2.13 (built against Spark 3.5). Spark itself is not bundled,
+use the Spark provided by your cluster.
+
+Maven:
+
+```xml
+<dependency>
+  <groupId>com.kelkoogroup</groupId>
+  <artifactId>spark-knn_2.12</artifactId>
+  <version>0.5.0</version>
+</dependency>
+```
+
+sbt:
+
+```scala
+libraryDependencies += "com.kelkoogroup" %% "spark-knn" % "0.5.0"
+```
+
+Use `spark-knn_2.13` for Scala 2.13. Available versions: https://central.sonatype.com/artifact/com.kelkoogroup/spark-knn_2.12
 
 k-NN can be used for both classification and regression, which are exposed using the new [Spark ML](http://spark.apache.org/docs/latest/ml-guide.html)
 API based on DataFrame. Both models accept a weight column so predictions can be optionally weighted.
@@ -72,8 +89,10 @@ python setup.py bdist_egg
 cd ..
 sbt package
 
-spark-submit --py-files python/dist/pyspark_knn-*.egg --driver-class-path spark-knn-core/target/scala-2.11/spark-knn_*.jar --jars spark-knn-core/target/scala-2.11/spark-knn_*.jar YOUR_SCRIPT
+spark-submit --py-files python/dist/pyspark_knn-*.egg --driver-class-path spark-knn-core/target/scala-2.12/spark-knn_*.jar --jars spark-knn-core/target/scala-2.12/spark-knn_*.jar YOUR_SCRIPT
 ```
+
+Replace `scala-2.12` by `scala-2.13` for Scala 2.13. The jar pattern must match only the main jar, not the `-sources` and `-javadoc` jars.
 
 ## Benchmark
 
@@ -109,11 +128,6 @@ in the original Google paper.
 
       NB: currently tree are recursively constructed and contain some duplicated code. The data structure is also questionable.
       However preliminary empirical testing shows each tree can comfortably handle tens to hundreds thousands of high dimensional data points.
-- [ ] upgrade ml implementation to use DataSet API (pending Spark 1.6)
-
-      NB: the largest cost of this implementation is disk I/O of repartition and distance calculation. While distance calculation
-      has no good way to optimize, with DataSet API, we might be able to drastically reduce the shuffle size during training
-      and prediction.
 - [ ] explore use of random projection for dimension reduction
 
 ## Credits
