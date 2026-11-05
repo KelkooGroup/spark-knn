@@ -13,8 +13,27 @@ a useful baseline model for many machine learning problems.
 
 ## How to Use
 
-This package is published using [sbt-spark-package](https://github.com/databricks/sbt-spark-package) and
-linking information can be found at http://spark-packages.org/package/saurfang/spark-knn
+This package is published on [Maven Central](https://central.sonatype.com/namespace/com.kelkoogroup) as
+`com.kelkoogroup:spark-knn` for Scala 2.12 and 2.13 (built against Spark 3.5). Spark itself is not bundled,
+use the Spark provided by your cluster.
+
+Maven:
+
+```xml
+<dependency>
+  <groupId>com.kelkoogroup</groupId>
+  <artifactId>spark-knn_2.12</artifactId>
+  <version>0.5.0</version>
+</dependency>
+```
+
+sbt:
+
+```scala
+libraryDependencies += "com.kelkoogroup" %% "spark-knn" % "0.5.0"
+```
+
+Use `spark-knn_2.13` for Scala 2.13. Available versions: https://central.sonatype.com/artifact/com.kelkoogroup/spark-knn_2.12
 
 k-NN can be used for both classification and regression, which are exposed using the new [Spark ML](http://spark.apache.org/docs/latest/ml-guide.html)
 API based on DataFrame. Both models accept a weight column so predictions can be optionally weighted.
