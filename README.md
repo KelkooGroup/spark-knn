@@ -1,9 +1,9 @@
 # spark-knn
 
-[![Join the chat at https://gitter.im/saurfang/spark-knn](https://badges.gitter.im/saurfang/spark-knn.svg)](https://gitter.im/saurfang/spark-knn?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-[![Build Status](https://travis-ci.org/saurfang/spark-knn.svg)](https://travis-ci.org/saurfang/spark-knn)
-[![codecov.io](http://codecov.io/github/saurfang/spark-knn/coverage.svg?branch=master)](http://codecov.io/github/saurfang/spark-knn?branch=master)
+> **This is a fork** of [saurfang/spark-knn](https://github.com/saurfang/spark-knn), maintained by
+> [Kelkoo Group](https://github.com/KelkooGroup/spark-knn). The original project has not been updated since 2020
+> and is not published on Maven Central. This fork is updated for recent Spark and Scala versions, and published
+> as `com.kelkoogroup:spark-knn`. Licensed under Apache-2.0, original work by Forest Fang and contributors.
 
 WIP...
 
