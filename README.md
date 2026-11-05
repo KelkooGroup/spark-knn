@@ -5,8 +5,6 @@
 > and is not published on Maven Central. This fork is updated for recent Spark and Scala versions, and published
 > as `com.kelkoogroup:spark-knn`. Licensed under Apache-2.0, original work by Forest Fang and contributors.
 
-WIP...
-
 k-Nearest Neighbors algorithm (k-NN) implemented on Apache Spark. This uses a hybrid spill tree approach to
 achieve high accuracy and search efficiency. The simplicity of k-NN and lack of tuning parameters makes k-NN
 a useful baseline model for many machine learning problems.
@@ -91,8 +89,10 @@ python setup.py bdist_egg
 cd ..
 sbt package
 
-spark-submit --py-files python/dist/pyspark_knn-*.egg --driver-class-path spark-knn-core/target/scala-2.11/spark-knn_*.jar --jars spark-knn-core/target/scala-2.11/spark-knn_*.jar YOUR_SCRIPT
+spark-submit --py-files python/dist/pyspark_knn-*.egg --driver-class-path spark-knn-core/target/scala-2.12/spark-knn_*.jar --jars spark-knn-core/target/scala-2.12/spark-knn_*.jar YOUR_SCRIPT
 ```
+
+Replace `scala-2.12` by `scala-2.13` for Scala 2.13. The jar pattern must match only the main jar, not the `-sources` and `-javadoc` jars.
 
 ## Benchmark
 
@@ -128,11 +128,6 @@ in the original Google paper.
 
       NB: currently tree are recursively constructed and contain some duplicated code. The data structure is also questionable.
       However preliminary empirical testing shows each tree can comfortably handle tens to hundreds thousands of high dimensional data points.
-- [ ] upgrade ml implementation to use DataSet API (pending Spark 1.6)
-
-      NB: the largest cost of this implementation is disk I/O of repartition and distance calculation. While distance calculation
-      has no good way to optimize, with DataSet API, we might be able to drastically reduce the shuffle size during training
-      and prediction.
 - [ ] explore use of random projection for dimension reduction
 
 ## Credits
