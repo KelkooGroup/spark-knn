@@ -15,7 +15,7 @@ object Dependencies {
     val netlib = "com.github.fommil.netlib" % "core" % "1.1.2"
 
     object Test {
-      val scalatest = "org.scalatest" %% "scalatest" % "3.2.17" % "test"
+      val scalatest = "org.scalatest" %% "scalatest" % "3.2.20" % "test"
       val sparktest = "org.apache.spark" %% "spark-core" % spark_version  % "test" classifier "tests"
     }
   }
